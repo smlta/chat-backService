@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO 星港聊天室</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="app-shell" aria-label="Socket.IO 网络聊天室">
+      <section class="join-view" id="joinView">
+        <div class="join-copy">
+          <p class="eyebrow">Realtime Lounge</p>
+          <h1>星港聊天室</h1>
+          <p>进入一个轻盈、顺滑、带在线状态和房间切换的 Socket.IO 实时聊天室。</p>
+        </div>
+
+        <form class="join-card" id="joinForm">
+          <label>
+            <span>昵称</span>
+            <input id="nameInput" maxlength="24" autocomplete="nickname" placeholder="给自己取个好记的名字" required />
+          </label>
+
+          <label>
+            <span>房间</span>
+            <select id="roomInput">
+              <option>大厅</option>
+              <option>前端设计</option>
+              <option>Node.js</option>
+              <option>深夜自习室</option>
+            </select>
+          </label>
+
+          <div class="color-row" aria-label="选择头像颜色">
+            <button class="color-dot active" type="button" data-color="#6f8cff" style="--dot:#6f8cff"></button>
+            <button class="color-dot" type="button" data-color="#15b8a6" style="--dot:#15b8a6"></button>
+            <button class="color-dot" type="button" data-color="#f9737d" style="--dot:#f9737d"></button>
+            <button class="color-dot" type="button" data-color="#f4b740" style="--dot:#f4b740"></button>
+          </div>
+
+          <button class="primary-btn" type="submit">
+            <span>进入聊天室</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m0 0-5-5m5 5-5 5" /></svg>
+          </button>
+        </form>
+      </section>
+
+      <section class="chat-view hidden" id="chatView">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="logo-mark">S</div>
+            <div>
+              <strong>星港聊天室</strong>
+              <span id="connectionText">正在连接</span>
+            </div>
+          </div>
+
+          <div class="room-switcher">
+            <span>当前房间</span>
+            <div class="room-control">
+              <input id="roomSwitchInput" maxlength="24" />
+              <button id="switchRoomBtn" title="切换房间" aria-label="切换房间">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="quick-rooms" aria-label="快捷房间">
+            <button data-room="大厅">大厅</button>
+            <button data-room="前端设计">前端设计</button>
+            <button data-room="Node.js">Node.js</button>
+            <button data-room="深夜自习室">深夜自习室</button>
+          </div>
+
+          <div class="online-panel">
+            <div class="panel-title">
+              <span>在线成员</span>
+              <strong id="onlineCount">0</strong>
+            </div>
+            <div class="user-list" id="userList"></div>
+          </div>
+
+          <div class="settings-panel">
+            <label class="toggle-line">
+              <span>通知音</span>
+              <input id="soundToggle" type="checkbox" checked />
+            </label>
+            <label class="toggle-line">
+              <span>柔和主题</span>
+              <input id="themeToggle" type="checkbox" />
+            </label>
+          </div>
+        </aside>
+
+        <section class="conversation">
+          <header class="chat-header">
+            <div>
+              <p class="eyebrow">Room</p>
+              <h2 id="roomTitle">大厅</h2>
+            </div>
+            <div class="header-actions">
+              <button id="clearBtn" title="清空本地消息" aria-label="清空本地消息">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" /></svg>
+              </button>
+            </div>
+          </header>
+
+          <div class="messages" id="messages" aria-live="polite"></div>
+          <div class="typing-line" id="typingLine"></div>
+
+          <form class="composer" id="messageForm">
+            <select id="moodInput" title="消息标签" aria-label="消息标签">
+              <option value="">普通</option>
+              <option value="灵感">灵感</option>
+              <option value="提问">提问</option>
+              <option value="公告">公告</option>
+            </select>
+            <textarea id="messageInput" rows="1" maxlength="800" placeholder="输入消息，Enter 发送，Shift + Enter 换行"></textarea>
+            <button class="send-btn" type="submit" title="发送" aria-label="发送">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 16-8-4 16-4-7-8-1Z" /></svg>
+            </button>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
