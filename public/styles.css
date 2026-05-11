@@ -495,6 +495,57 @@ svg {
   font-size: 13px;
 }
 
+.live2d-companion {
+  position: fixed;
+  right: 16px;
+  bottom: 6px;
+  z-index: 20;
+  width: min(260px, 42vw);
+  height: min(380px, 58vh);
+  user-select: none;
+  touch-action: none;
+  filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.32));
+}
+
+.live2d-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.live2d-actions {
+  position: absolute;
+  right: 14px;
+  bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  width: min(230px, 90vw);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.live2d-companion:hover .live2d-actions,
+.live2d-companion:focus-within .live2d-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.live2d-actions button {
+  min-width: 38px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--surface-strong);
+  backdrop-filter: blur(14px);
+}
+
 .typing-line {
   padding: 0 24px;
   color: var(--muted);
@@ -566,6 +617,13 @@ svg {
 
   .composer select {
     grid-column: 1 / -1;
+  }
+
+  .live2d-companion {
+    width: 170px;
+    height: 250px;
+    right: 2px;
+    bottom: 64px;
   }
 }
 

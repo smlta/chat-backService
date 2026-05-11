@@ -17,6 +17,8 @@ const io = new Server(server, {
 
 // 托管 public 目录，浏览器访问根路径即可打开聊天室页面。
 app.use(express.static(path.join(__dirname, "public")));
+// 暴露本地 Live2D 模型资源，前端通过 /models/xueli/雪莉.model3.json 加载雪莉。
+app.use("/models/xueli", express.static(path.join(__dirname, "雪莉")));
 
 // 在线用户和房间消息历史都保存在内存中，适合学习和小型演示。
 // 如果要上线，可替换为 Redis / 数据库，让多进程和重启后也能保留状态。
