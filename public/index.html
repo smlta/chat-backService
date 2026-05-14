@@ -3,45 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Socket.IO 星港聊天室</title>
+    <title>星屿次元聊天室</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="ambient ambient-one"></div>
-    <div class="ambient ambient-two"></div>
+    <div class="sky-glow sky-glow-one"></div>
+    <div class="sky-glow sky-glow-two"></div>
+    <div class="sky-grid"></div>
 
-    <main class="app-shell" aria-label="Socket.IO 网络聊天室">
+    <main class="app-shell" aria-label="Socket.IO 实时聊天室">
       <section class="join-view" id="joinView">
         <div class="join-copy">
-          <p class="eyebrow">Realtime Lounge</p>
-          <h1>星港聊天室</h1>
-          <p>进入一个轻盈、顺滑、带在线状态和房间切换的 Socket.IO 实时聊天室。</p>
+          <p class="eyebrow">ACG Realtime Lounge</p>
+          <h1>星屿次元聊天室</h1>
+          <p>
+            进入一个带有房间切换、在线状态、Live2D 看板娘和多媒体消息的实时聊天室。
+            现在它更偏二次元风格，也支持图片、表情包和短视频分享。
+          </p>
+
+          <div class="feature-chips">
+            <span>弹幕感气泡</span>
+            <span>图片 / GIF / 视频</span>
+            <span>房间主题切换</span>
+          </div>
         </div>
 
         <form class="join-card" id="joinForm">
+          <div class="card-deco">
+            <span></span>
+            <span></span>
+          </div>
+
           <label>
             <span>昵称</span>
-            <input id="nameInput" maxlength="24" autocomplete="nickname" placeholder="给自己取个好记的名字" required />
+            <input id="nameInput" maxlength="24" autocomplete="nickname" placeholder="给自己取一个可爱名字" required />
           </label>
 
           <label>
             <span>房间</span>
             <select id="roomInput">
               <option>大厅</option>
-              <option>前端设计</option>
-              <option>Node.js</option>
-              <option>深夜自习室</option>
+              <option>番剧补完</option>
+              <option>游戏开黑</option>
+              <option>深夜电台</option>
             </select>
           </label>
 
-          <div class="color-row" aria-label="选择头像颜色">
-            <button class="color-dot active" type="button" data-color="#6f8cff" style="--dot:#6f8cff"></button>
-            <button class="color-dot" type="button" data-color="#15b8a6" style="--dot:#15b8a6"></button>
-            <button class="color-dot" type="button" data-color="#f9737d" style="--dot:#f9737d"></button>
-            <button class="color-dot" type="button" data-color="#f4b740" style="--dot:#f4b740"></button>
+          <div>
+            <span class="field-label">角色配色</span>
+            <div class="color-row" aria-label="选择头像颜色">
+              <button class="color-dot active" type="button" data-color="#7c91ff" style="--dot:#7c91ff"></button>
+              <button class="color-dot" type="button" data-color="#ff7eb6" style="--dot:#ff7eb6"></button>
+              <button class="color-dot" type="button" data-color="#31d5c8" style="--dot:#31d5c8"></button>
+              <button class="color-dot" type="button" data-color="#ffb85c" style="--dot:#ffb85c"></button>
+            </div>
           </div>
 
           <button class="primary-btn" type="submit">
@@ -54,15 +75,15 @@
       <section class="chat-view hidden" id="chatView">
         <aside class="sidebar">
           <div class="brand">
-            <div class="logo-mark">S</div>
+            <div class="logo-mark">星</div>
             <div>
-              <strong>星港聊天室</strong>
+              <strong>星屿次元</strong>
               <span id="connectionText">正在连接</span>
             </div>
           </div>
 
-          <div class="room-switcher">
-            <span>当前房间</span>
+          <div class="room-switcher panel">
+            <span class="field-label">当前房间</span>
             <div class="room-control">
               <input id="roomSwitchInput" maxlength="24" />
               <button id="switchRoomBtn" title="切换房间" aria-label="切换房间">
@@ -73,12 +94,23 @@
 
           <div class="quick-rooms" aria-label="快捷房间">
             <button data-room="大厅">大厅</button>
-            <button data-room="前端设计">前端设计</button>
-            <button data-room="Node.js">Node.js</button>
-            <button data-room="深夜自习室">深夜自习室</button>
+            <button data-room="番剧补完">番剧补完</button>
+            <button data-room="游戏开黑">游戏开黑</button>
+            <button data-room="深夜电台">深夜电台</button>
           </div>
 
-          <div class="online-panel">
+          <div class="theme-panel panel">
+            <div class="panel-title panel-title-static">
+              <span>场景主题</span>
+            </div>
+            <div class="theme-buttons">
+              <button class="theme-chip active" type="button" data-theme="cosmos">星空</button>
+              <button class="theme-chip" type="button" data-theme="sunset">晚霞</button>
+              <button class="theme-chip" type="button" data-theme="mint">薄荷</button>
+            </div>
+          </div>
+
+          <div class="online-panel panel">
             <div class="panel-title">
               <span>在线成员</span>
               <strong id="onlineCount">0</strong>
@@ -86,13 +118,13 @@
             <div class="user-list" id="userList"></div>
           </div>
 
-          <div class="settings-panel">
+          <div class="settings-panel panel">
             <label class="toggle-line">
-              <span>通知音</span>
+              <span>提示音</span>
               <input id="soundToggle" type="checkbox" checked />
             </label>
             <label class="toggle-line">
-              <span>柔和主题</span>
+              <span>舒缓亮色</span>
               <input id="themeToggle" type="checkbox" />
             </label>
           </div>
@@ -101,7 +133,7 @@
         <section class="conversation">
           <header class="chat-header">
             <div>
-              <p class="eyebrow">Room</p>
+              <p class="eyebrow">Room Broadcast</p>
               <h2 id="roomTitle">大厅</h2>
             </div>
             <div class="header-actions">
@@ -115,16 +147,47 @@
           <div class="typing-line" id="typingLine"></div>
 
           <form class="composer" id="messageForm">
-            <select id="moodInput" title="消息标签" aria-label="消息标签">
-              <option value="">普通</option>
-              <option value="灵感">灵感</option>
-              <option value="提问">提问</option>
-              <option value="公告">公告</option>
-            </select>
-            <textarea id="messageInput" rows="1" maxlength="800" placeholder="输入消息，Enter 发送，Shift + Enter 换行"></textarea>
-            <button class="send-btn" type="submit" title="发送" aria-label="发送">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 16-8-4 16-4-7-8-1Z" /></svg>
-            </button>
+            <div class="composer-top">
+              <select id="moodInput" title="消息标签" aria-label="消息标签">
+                <option value="">普通</option>
+                <option value="灵感">灵感</option>
+                <option value="提问">提问</option>
+                <option value="公告">公告</option>
+                <option value="安利">安利</option>
+              </select>
+
+              <div class="quick-emoji" id="quickEmoji" aria-label="快捷表情">
+                <button type="button" data-emoji="(≧▽≦)">^_^</button>
+                <button type="button" data-emoji="(๑•̀ㅂ•́)و✧">打气</button>
+                <button type="button" data-emoji="QAQ">QAQ</button>
+                <button type="button" data-emoji="ฅ^•ﻌ•^ฅ">猫猫</button>
+              </div>
+            </div>
+
+            <div class="attachment-bar">
+              <label class="attach-btn" for="mediaInput">
+                <input id="mediaInput" type="file" accept="image/*,video/*" />
+                <span>上传图片 / 视频</span>
+              </label>
+              <button class="attach-btn sticker-btn" id="stickerToggleBtn" type="button">贴纸库</button>
+              <span class="attachment-hint" id="attachmentHint">支持图片、GIF、MP4 / WebM，单文件最多约 6MB。</span>
+            </div>
+
+            <div class="sticker-panel hidden" id="stickerPanel" aria-label="贴纸面板">
+              <button type="button" data-sticker="https://media.tenor.com/XO8L4cYvT0AAAAAC/anime-wave.gif">挥手</button>
+              <button type="button" data-sticker="https://media.tenor.com/2roX3uxz_68AAAAC/bocchi-the-rock.gif">激动</button>
+              <button type="button" data-sticker="https://media.tenor.com/0AVbKGY_MxMAAAAC/anime-sleep.gif">晚安</button>
+              <button type="button" data-sticker="https://media.tenor.com/S8sS5XK0s8YAAAAC/spy-family-anya.gif">Anya</button>
+            </div>
+
+            <div class="attachment-preview hidden" id="attachmentPreview"></div>
+
+            <div class="composer-main">
+              <textarea id="messageInput" rows="1" maxlength="800" placeholder="输入消息，Enter 发送，Shift + Enter 换行"></textarea>
+              <button class="send-btn" type="submit" title="发送" aria-label="发送">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 16-8-4 16-4-7-8-1Z" /></svg>
+              </button>
+            </div>
           </form>
         </section>
       </section>
